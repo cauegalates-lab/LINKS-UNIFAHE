@@ -63,230 +63,6 @@
             border-radius: 10px;
         }
 
-        /* Botão de configuração */
-        .config-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--unifahe-blue);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 22px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-            z-index: 10;
-        }
-
-        .config-btn:hover {
-            transform: rotate(90deg);
-            background: #004c99;
-        }
-
-        /* Modal de configuração */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            width: 90%;
-            max-width: 700px;
-            max-height: 85vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--bg-orange);
-        }
-
-        .modal-header h2 {
-            color: var(--unifahe-blue);
-            font-size: 20px;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #999;
-        }
-
-        .close-modal:hover {
-            color: var(--bg-orange);
-        }
-
-        .edit-area {
-            width: 100%;
-            min-height: 400px;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 13px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            resize: vertical;
-            margin-bottom: 15px;
-        }
-
-        .save-btn {
-            background: var(--unifahe-blue);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        .save-btn:hover {
-            background: #004c99;
-        }
-
-        .download-btn {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .download-btn:hover {
-            background: #1e7e34;
-        }
-
-        /* Modal de senha */
-        .password-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .password-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            width: 90%;
-            max-width: 350px;
-            text-align: center;
-        }
-
-        .password-content h3 {
-            color: var(--unifahe-blue);
-            margin-bottom: 20px;
-        }
-
-        .password-content input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            margin-bottom: 15px;
-            text-align: center;
-            letter-spacing: 5px;
-        }
-
-        .password-content input:focus {
-            border-color: var(--unifahe-blue);
-            outline: none;
-        }
-
-        .password-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .password-buttons button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn-confirm {
-            background: var(--unifahe-blue);
-            color: white;
-        }
-
-        .btn-confirm:hover {
-            background: #004c99;
-        }
-
-        .btn-cancel {
-            background: #ccc;
-            color: #333;
-        }
-
-        .btn-cancel:hover {
-            background: #bbb;
-        }
-
-        .error-msg {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        /* Mensagem de links expirados */
-        .expired-message {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .expired-message h3 {
-            color: #856404;
-            margin-bottom: 10px;
-        }
-
-        .expired-message p {
-            color: #856404;
-            font-size: 13px;
-        }
-
         .logo {
             max-width: 150px;
             margin: 0 auto 5px;
@@ -328,21 +104,6 @@
             background-repeat: no-repeat;
             background-position: right 12px center;
             background-size: 16px;
-        }
-
-        select:disabled {
-            background-color: #f5f5f5;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        select:hover:not(:disabled) {
-            border-color: var(--bg-orange);
-        }
-
-        select:focus:not(:disabled) {
-            border-color: var(--unifahe-blue);
-            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
         }
 
         select option {
@@ -423,7 +184,7 @@
             border-radius: 10px;
         }
 
-        button:not(.config-btn):not(.close-modal):not(.save-btn):not(.download-btn):not(.btn-confirm):not(.btn-cancel) {
+        button {
             background: var(--unifahe-blue);
             color: white;
             border: none;
@@ -438,13 +199,7 @@
             margin-bottom: 8px;
         }
 
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        button:hover:not(.config-btn):not(.close-modal):not(.save-btn):not(.download-btn):not(.btn-confirm):not(.btn-cancel):not(:disabled) {
+        button:hover {
             background: #004c99;
             transform: scale(0.98);
         }
@@ -471,38 +226,28 @@
             color: var(--bg-orange);
             font-weight: bold;
         }
-
-        .warning-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .info-text {
-            font-size: 11px;
-            color: #666;
-            margin-top: 10px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <button class="config-btn" onclick="verificarSenha()">⚙️</button>
-    
     <img src="Horizontal colorido 1.png" alt="UNIFAHE" class="logo">
     <h1>LINKS UNIFAHE</h1>
     
-    <div id="expiredWarning" style="display: none;" class="expired-message">
-        <div class="warning-icon">⏰</div>
-        <h3>Links Expirados!</h3>
-        <p>Os links do dia anterior não estão mais disponíveis.</p>
-        <p>Clique no botão ⚙️ e atualize com os novos links do dia.</p>
-    </div>
-    
     <label>Escolha a oferta:</label>
-    <select id="cursoSelect" onchange="gerarMensagem()" disabled>
+    <select id="cursoSelect">
         <option value="">Selecione um curso...</option>
+        <!-- ⬇️⬇️⬇️ ALTERE OS LINKS AQUI ⬇️⬇️⬇️ -->
+        <option value="https://mpago.la/2ppiqEy">2° graduação 12 meses - 12x124,00 - 1.488,00$</option>
+        <option value="https://mpago.la/1atVomb">2° graduação 12 meses (com desconto) - 12x99,00 - 1.188,00$</option>
+        <option value="https://mpago.la/2AjDVmn">1 Pós - 12x69,90 - R$ 838,80</option>
+        <option value="https://mpago.la/2Dfn5FM">2° graduação 18 meses - 12x139,00 - 1.668,00$</option>
+        <option value="https://mpago.la/2KBj3Cm">2° graduação em 18 meses (com desconto) - 12x119,00 - R$1428,00</option>
+        <option value="https://mpago.la/33aPNNC">Combo 2x 2ª Graduações 12 meses - 12x198,00 - R$2376,00</option>
+        <option value="https://mpago.la/1Dprmgg">Combo 2x 2ª Graduações 18 meses - 12x238,00 - R$2856,00</option>
+        <option value="https://mpago.la/2zMELwq">2 Pós + 1 Brinde - 12x 89.90 - R$ 1078,80</option>
+        <option value="https://mpago.la/1pVV2sY">2 cursos de 2 graduação 12 meses - 12x 218 - R$2616,00</option>
+        <!-- ⬆️⬆️⬆️ ALTERE OS LINKS AQUI ⬆️⬆️⬆️ -->
     </select>
 
     <!-- Configuração de tempo -->
@@ -522,7 +267,7 @@
 
     <div class="output-box" id="mensagemOutput">Selecione uma oferta acima</div>
 
-    <button id="copyBtn" onclick="copiarTexto()" disabled>Copiar Mensagem</button>
+    <button onclick="copiarTexto()">Copiar Mensagem</button>
     <div id="status" class="copy-status">Copiado com sucesso!</div>
     
     <div class="footer">
@@ -530,48 +275,7 @@
     </div>
 </div>
 
-<!-- Modal de Senha -->
-<div id="passwordModal" class="password-modal">
-    <div class="password-content">
-        <h3>Acesso Restrito</h3>
-        <input type="password" id="senhaInput" placeholder="Digite a senha" maxlength="4">
-        <div id="errorMsg" class="error-msg">Senha incorreta! Tente novamente.</div>
-        <div class="password-buttons">
-            <button class="btn-cancel" onclick="fecharPasswordModal()">Cancelar</button>
-            <button class="btn-confirm" onclick="confirmarSenha()">Confirmar</button>
-        </div>
-    </div>
-</div>
-
-<!-- Modal de Configuração -->
-<div id="configModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Configurar Links</h2>
-            <button class="close-modal" onclick="fecharConfig()">✕</button>
-        </div>
-        <textarea id="editLinks" class="edit-area" placeholder="Cole aqui os novos links no formato padrão..."></textarea>
-        <button class="save-btn" onclick="processarLinks()">Processar Links</button>
-        <button class="download-btn" id="downloadJsonBtn" style="display: none;" onclick="baixarJSON()">Baixar JSON para o GitHub</button>
-        <div id="jsonPreview" style="display: none; margin-top: 15px;">
-            <label style="font-size: 11px; color: #666;">JSON gerado (copie para o arquivo links.json):</label>
-            <textarea id="jsonResultado" style="width:100%; height:200px; margin-top:5px; padding:10px; font-family:monospace; font-size:11px; border:1px solid #ddd; border-radius:8px;" readonly></textarea>
-        </div>
-        <div class="info-text">
-            💡 Como atualizar: Após processar os links, clique em "Baixar JSON" e substitua o arquivo links.json no GitHub
-        </div>
-    </div>
-</div>
-
 <script>
-    const SENHA_CORRETA = "2846";
-    
-    // URL do arquivo JSON no GitHub (RAW)
-    const JSON_URL = 'links.json';
-    
-    // Variável para armazenar o JSON gerado
-    let jsonGerado = null;
-
     // Função para abrir link em janela pequena
     function abrirLinkPopup(link) {
         if (!link) return;
@@ -591,73 +295,6 @@
             popup.focus();
         } else {
             alert('Por favor, permita pop-ups para este site para abrir o link.');
-        }
-    }
-
-    // Verificar se os links ainda são válidos
-    function isLinksValid(dataAtualizacao) {
-        if (!dataAtualizacao) return false;
-        
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);
-        
-        const dataJson = new Date(dataAtualizacao);
-        dataJson.setHours(0, 0, 0, 0);
-        
-        return dataJson.getTime() === hoje.getTime();
-    }
-
-    // Carregar links do arquivo JSON
-    async function carregarLinksDoJson() {
-        try {
-            const response = await fetch(JSON_URL + '?t=' + new Date().getTime());
-            if (!response.ok) {
-                throw new Error('Erro ao carregar links');
-            }
-            const dados = await response.json();
-            
-            const isValid = isLinksValid(dados.data_atualizacao);
-            
-            if (isValid) {
-                atualizarSelectComOpcoes(dados.links);
-                habilitarInterface(true);
-                document.getElementById('expiredWarning').style.display = 'none';
-            } else {
-                habilitarInterface(false);
-                document.getElementById('expiredWarning').style.display = 'block';
-                document.getElementById('mensagemOutput').innerHTML = "Links do dia expiraram! Aguarde o ADM atualizar.";
-            }
-        } catch (error) {
-            console.error('Erro:', error);
-            document.getElementById('mensagemOutput').innerHTML = "Erro ao carregar links. Tente novamente mais tarde.";
-            habilitarInterface(false);
-        }
-    }
-
-    // Habilitar ou desabilitar a interface
-    function habilitarInterface(habilitar) {
-        const select = document.getElementById('cursoSelect');
-        const copyBtn = document.getElementById('copyBtn');
-        
-        if (!habilitar) {
-            select.disabled = true;
-            copyBtn.disabled = true;
-        } else {
-            select.disabled = false;
-            copyBtn.disabled = false;
-        }
-    }
-
-    // Atualizar select com as opções
-    function atualizarSelectComOpcoes(opcoes) {
-        const select = document.getElementById('cursoSelect');
-        select.innerHTML = '<option value="">Selecione um curso...</option>';
-        
-        for (const opcao of opcoes) {
-            const option = document.createElement('option');
-            option.value = opcao.link;
-            option.textContent = opcao.nomeExibicao;
-            select.appendChild(option);
         }
     }
 
@@ -697,169 +334,11 @@
         });
     }
 
-    // Funções de senha
-    function verificarSenha() {
-        const modal = document.getElementById('passwordModal');
-        const senhaInput = document.getElementById('senhaInput');
-        const errorMsg = document.getElementById('errorMsg');
-        
-        senhaInput.value = '';
-        errorMsg.style.display = 'none';
-        modal.style.display = 'flex';
-        senhaInput.focus();
-    }
-
-    function fecharPasswordModal() {
-        const modal = document.getElementById('passwordModal');
-        modal.style.display = 'none';
-    }
-
-    function confirmarSenha() {
-        const senhaInput = document.getElementById('senhaInput');
-        const errorMsg = document.getElementById('errorMsg');
-        
-        if (senhaInput.value === SENHA_CORRETA) {
-            fecharPasswordModal();
-            abrirConfig();
-        } else {
-            errorMsg.style.display = 'block';
-            senhaInput.value = '';
-            senhaInput.focus();
-        }
-    }
-
-    function abrirConfig() {
-        const modal = document.getElementById('configModal');
-        const editArea = document.getElementById('editLinks');
-        const downloadBtn = document.getElementById('downloadJsonBtn');
-        const jsonPreview = document.getElementById('jsonPreview');
-        
-        editArea.value = '';
-        downloadBtn.style.display = 'none';
-        jsonPreview.style.display = 'none';
-        jsonGerado = null;
-        
-        modal.style.display = 'flex';
-    }
-
-    function fecharConfig() {
-        const modal = document.getElementById('configModal');
-        modal.style.display = 'none';
-    }
-
-    function processarLinks() {
-        const texto = document.getElementById('editLinks').value;
-        
-        if (!texto.trim()) {
-            alert('Por favor, cole os links no formato correto.');
-            return;
-        }
-        
-        const linhas = texto.split('\n');
-        const opcoes = [];
-        
-        let valor = '';
-        let categoria = '';
-        let link = '';
-        
-        for (let i = 0; i < linhas.length; i++) {
-            const linha = linhas[i].trim();
-            
-            if (linha === '') continue;
-            
-            if (linha.includes('_*') || linha === 'Segue os links mais usados padrão para todos os alunos:' || linha === '') {
-                continue;
-            }
-            
-            if ((linha.includes('$') || linha.includes('R$')) && !linha.includes('🔗') && !linha.includes('*')) {
-                valor = linha.replace('👇🏻', '').trim();
-            }
-            
-            if (linha.startsWith('*') && linha.endsWith('*')) {
-                categoria = linha.replace(/\*/g, '');
-                categoria = categoria.replace('👇🏻', '').trim();
-            }
-            
-            if (linha.includes('🔗') && linha.includes('https://')) {
-                const match = linha.match(/https:\/\/[^\s]+/);
-                if (match) {
-                    link = match[0];
-                    
-                    if (categoria && link) {
-                        const nomeExibicao = valor ? `${categoria} - ${valor}` : categoria;
-                        opcoes.push({ categoria, valor, link, nomeExibicao });
-                        
-                        valor = '';
-                        categoria = '';
-                        link = '';
-                    }
-                }
-            }
-        }
-        
-        if (opcoes.length > 0) {
-            const hoje = new Date().toISOString().split('T')[0];
-            const dadosJson = {
-                data_atualizacao: hoje,
-                links: opcoes
-            };
-            
-            jsonGerado = JSON.stringify(dadosJson, null, 2);
-            
-            // Mostrar o JSON gerado
-            document.getElementById('jsonResultado').value = jsonGerado;
-            document.getElementById('jsonPreview').style.display = 'block';
-            document.getElementById('downloadJsonBtn').style.display = 'block';
-            
-            alert(`${opcoes.length} links processados! Clique em "Baixar JSON" e substitua o arquivo links.json no GitHub.`);
-        } else {
-            alert('Nenhum link encontrado. Verifique o formato:\n\nExemplo:\n12x124,00 - 1.488,00$ 👇🏻\n*2° graduação 12 meses*\n🔗 https://mpago.la/...');
-        }
-    }
-
-    function baixarJSON() {
-        if (!jsonGerado) {
-            alert('Nenhum JSON gerado. Processe os links primeiro.');
-            return;
-        }
-        
-        const blob = new Blob([jsonGerado], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'links.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        alert('Arquivo links.json baixado! Agora substitua o arquivo no GitHub e faça commit.');
-    }
-
-    // Iniciar: carregar links do JSON
-    carregarLinksDoJson();
-
-    // Verificar a cada minuto
-    setInterval(() => {
-        carregarLinksDoJson();
-    }, 60000);
-
-    window.onclick = function(event) {
-        const modal = document.getElementById('configModal');
-        const passwordModal = document.getElementById('passwordModal');
-        if (event.target === modal) {
-            fecharConfig();
-        }
-        if (event.target === passwordModal) {
-            fecharPasswordModal();
-        }
-    }
-
-    document.getElementById('senhaInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            confirmarSenha();
-        }
-    });
+    // Evento para gerar mensagem quando selecionar o curso
+    document.getElementById('cursoSelect').addEventListener('change', gerarMensagem);
+    
+    // Evento para gerar mensagem quando mudar os minutos
+    document.getElementById('tempoExpiracao').addEventListener('change', gerarMensagem);
 </script>
 
 </body>
