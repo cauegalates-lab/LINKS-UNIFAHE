@@ -141,7 +141,7 @@
 
         .edit-area {
             width: 100%;
-            min-height: 500px;
+            min-height: 400px;
             padding: 15px;
             font-family: monospace;
             font-size: 13px;
@@ -161,10 +161,27 @@
             font-size: 14px;
             cursor: pointer;
             width: 100%;
+            margin-bottom: 10px;
         }
 
         .save-btn:hover {
             background: #004c99;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .download-btn:hover {
+            background: #1e7e34;
         }
 
         /* Modal de senha */
@@ -338,6 +355,27 @@
             font-style: italic;
         }
 
+        /* Configuração de tempo */
+        .time-config {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .time-config label {
+            margin-bottom: 0;
+            font-size: 12px;
+        }
+
+        .time-config select {
+            width: auto;
+            margin-bottom: 0;
+            padding: 8px 12px;
+            flex: 1;
+        }
+
         .output-box {
             background: #f8f9fa;
             padding: 12px;
@@ -366,6 +404,11 @@
             color: var(--bg-orange);
         }
 
+        .output-box strong {
+            font-weight: bold;
+            color: var(--unifahe-blue);
+        }
+
         .output-box::-webkit-scrollbar {
             width: 5px;
         }
@@ -380,7 +423,7 @@
             border-radius: 10px;
         }
 
-        button:not(.config-btn):not(.close-modal):not(.save-btn):not(.btn-confirm):not(.btn-cancel) {
+        button:not(.config-btn):not(.close-modal):not(.save-btn):not(.download-btn):not(.btn-confirm):not(.btn-cancel) {
             background: var(--unifahe-blue);
             color: white;
             border: none;
@@ -401,7 +444,7 @@
             transform: none;
         }
 
-        button:hover:not(.config-btn):not(.close-modal):not(.save-btn):not(.btn-confirm):not(.btn-cancel):not(:disabled) {
+        button:hover:not(.config-btn):not(.close-modal):not(.save-btn):not(.download-btn):not(.btn-confirm):not(.btn-cancel):not(:disabled) {
             background: #004c99;
             transform: scale(0.98);
         }
@@ -433,6 +476,13 @@
             font-size: 48px;
             margin-bottom: 10px;
         }
+
+        .info-text {
+            font-size: 11px;
+            color: #666;
+            margin-top: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -450,15 +500,30 @@
         <p>Clique no botão ⚙️ e atualize com os novos links do dia.</p>
     </div>
     
-    <label>📚 Escolha a oferta:</label>
+    <label>Escolha a oferta:</label>
     <select id="cursoSelect" onchange="gerarMensagem()" disabled>
         <option value="">Selecione um curso...</option>
     </select>
 
-    <div class="output-box" id="mensagemOutput">✨ Selecione uma oferta acima ✨</div>
+    <!-- Configuração de tempo -->
+    <div class="time-config">
+        <label>Tempo de expiração:</label>
+        <select id="tempoExpiracao">
+            <option value="1">1 minuto</option>
+            <option value="3">3 minutos</option>
+            <option value="5">5 minutos</option>
+            <option value="10">10 minutos</option>
+            <option value="15" selected>15 minutos</option>
+            <option value="25">25 minutos</option>
+            <option value="30">30 minutos</option>
+            <option value="60">60 minutos</option>
+        </select>
+    </div>
 
-    <button id="copyBtn" onclick="copiarTexto()" disabled>📋 Copiar Mensagem</button>
-    <div id="status" class="copy-status">✅ Copiado com sucesso!</div>
+    <div class="output-box" id="mensagemOutput">Selecione uma oferta acima</div>
+
+    <button id="copyBtn" onclick="copiarTexto()" disabled>Copiar Mensagem</button>
+    <div id="status" class="copy-status">Copiado com sucesso!</div>
     
     <div class="footer">
         Desenvolvido por <span>Cauê</span> & IA
@@ -468,7 +533,7 @@
 <!-- Modal de Senha -->
 <div id="passwordModal" class="password-modal">
     <div class="password-content">
-        <h3>🔒 Acesso Restrito</h3>
+        <h3>Acesso Restrito</h3>
         <input type="password" id="senhaInput" placeholder="Digite a senha" maxlength="4">
         <div id="errorMsg" class="error-msg">Senha incorreta! Tente novamente.</div>
         <div class="password-buttons">
@@ -482,20 +547,30 @@
 <div id="configModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>⚙️ Configurar Links</h2>
+            <h2>Configurar Links</h2>
             <button class="close-modal" onclick="fecharConfig()">✕</button>
         </div>
         <textarea id="editLinks" class="edit-area" placeholder="Cole aqui os novos links no formato padrão..."></textarea>
-        <button class="save-btn" onclick="salvarLinks()">💾 Salvar Links</button>
+        <button class="save-btn" onclick="processarLinks()">Processar Links</button>
+        <button class="download-btn" id="downloadJsonBtn" style="display: none;" onclick="baixarJSON()">Baixar JSON para o GitHub</button>
+        <div id="jsonPreview" style="display: none; margin-top: 15px;">
+            <label style="font-size: 11px; color: #666;">JSON gerado (copie para o arquivo links.json):</label>
+            <textarea id="jsonResultado" style="width:100%; height:200px; margin-top:5px; padding:10px; font-family:monospace; font-size:11px; border:1px solid #ddd; border-radius:8px;" readonly></textarea>
+        </div>
+        <div class="info-text">
+            💡 Como atualizar: Após processar os links, clique em "Baixar JSON" e substitua o arquivo links.json no GitHub
+        </div>
     </div>
 </div>
 
 <script>
     const SENHA_CORRETA = "2846";
     
-    // Chave para salvar a data da última atualização no localStorage
-    const STORAGE_KEY = 'unifahe_links_data';
-    const DATE_KEY = 'unifahe_update_date';
+    // URL do arquivo JSON no GitHub (RAW)
+    const JSON_URL = 'links.json';
+    
+    // Variável para armazenar o JSON gerado
+    let jsonGerado = null;
 
     // Função para abrir link em janela pequena
     function abrirLinkPopup(link) {
@@ -519,38 +594,61 @@
         }
     }
 
-    // Verificar se os links ainda são válidos (não passou da meia-noite)
-    function isLinksValid() {
-        const savedDate = localStorage.getItem(DATE_KEY);
-        if (!savedDate) return false;
+    // Verificar se os links ainda são válidos
+    function isLinksValid(dataAtualizacao) {
+        if (!dataAtualizacao) return false;
         
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
         
-        const savedDateObj = new Date(savedDate);
-        savedDateObj.setHours(0, 0, 0, 0);
+        const dataJson = new Date(dataAtualizacao);
+        dataJson.setHours(0, 0, 0, 0);
         
-        return savedDateObj.getTime() === today.getTime();
+        return dataJson.getTime() === hoje.getTime();
     }
 
-    // Salvar a data de atualização
-    function saveUpdateDate() {
-        const today = new Date();
-        localStorage.setItem(DATE_KEY, today.toISOString());
-    }
-
-    // Carregar links salvos do localStorage
-    function loadLinks() {
-        const savedData = localStorage.getItem(STORAGE_KEY);
-        if (savedData) {
-            const opcoes = JSON.parse(savedData);
-            atualizarSelectComOpcoes(opcoes);
+    // Carregar links do arquivo JSON
+    async function carregarLinksDoJson() {
+        try {
+            const response = await fetch(JSON_URL + '?t=' + new Date().getTime());
+            if (!response.ok) {
+                throw new Error('Erro ao carregar links');
+            }
+            const dados = await response.json();
+            
+            const isValid = isLinksValid(dados.data_atualizacao);
+            
+            if (isValid) {
+                atualizarSelectComOpcoes(dados.links);
+                habilitarInterface(true);
+                document.getElementById('expiredWarning').style.display = 'none';
+            } else {
+                habilitarInterface(false);
+                document.getElementById('expiredWarning').style.display = 'block';
+                document.getElementById('mensagemOutput').innerHTML = "Links do dia expiraram! Aguarde o ADM atualizar.";
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            document.getElementById('mensagemOutput').innerHTML = "Erro ao carregar links. Tente novamente mais tarde.";
+            habilitarInterface(false);
         }
-        
-        checkLinksValidity();
     }
 
-    // Atualizar select com as opções salvas
+    // Habilitar ou desabilitar a interface
+    function habilitarInterface(habilitar) {
+        const select = document.getElementById('cursoSelect');
+        const copyBtn = document.getElementById('copyBtn');
+        
+        if (!habilitar) {
+            select.disabled = true;
+            copyBtn.disabled = true;
+        } else {
+            select.disabled = false;
+            copyBtn.disabled = false;
+        }
+    }
+
+    // Atualizar select com as opções
     function atualizarSelectComOpcoes(opcoes) {
         const select = document.getElementById('cursoSelect');
         select.innerHTML = '<option value="">Selecione um curso...</option>';
@@ -563,61 +661,32 @@
         }
     }
 
-    // Verificar se os links estão válidos e atualizar UI
-    function checkLinksValidity() {
-        const isValid = isLinksValid();
-        const select = document.getElementById('cursoSelect');
-        const copyBtn = document.getElementById('copyBtn');
-        const warningDiv = document.getElementById('expiredWarning');
-        const output = document.getElementById('mensagemOutput');
-        
-        if (!isValid) {
-            select.disabled = true;
-            copyBtn.disabled = true;
-            warningDiv.style.display = 'block';
-            
-            if (output.innerHTML !== "✨ Selecione uma oferta acima ✨") {
-                output.innerHTML = "⏰ Links expirados! Clique no botão ⚙️ para atualizar com os novos links do dia.";
-            }
-        } else {
-            select.disabled = false;
-            copyBtn.disabled = false;
-            warningDiv.style.display = 'none';
-        }
-    }
-
     function gerarMensagem() {
         const select = document.getElementById('cursoSelect');
         const link = select.value;
         const output = document.getElementById('mensagemOutput');
-        
-        if (!isLinksValid()) {
-            output.innerHTML = "⏰ Links expirados! Clique no botão ⚙️ para atualizar com os novos links do dia.";
-            return;
-        }
+        const tempoSelect = document.getElementById('tempoExpiracao');
+        const minutos = tempoSelect.value;
         
         if (!link) {
-            output.innerHTML = "✨ Selecione uma oferta acima ✨";
+            output.innerHTML = "Selecione uma oferta acima";
             return;
         }
 
-        const textoHTML = `🔗 Aqui está seu link!<br><a href="#" onclick="abrirLinkPopup('${link}'); return false;">${link}</a><br><br>⏰ Lembrando que para sua segurança o link expirará em 15 minutos.<br><br>📸 Me envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
+        const textoHTML = `Aqui está seu link!<br><a href="#" onclick="abrirLinkPopup('${link}'); return false;">${link}</a><br><br>Lembrando que para sua segurança o link expirará em <strong>${minutos} minutos</strong>.<br><br>Me envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
         
         output.innerHTML = textoHTML;
     }
 
     function copiarTexto() {
-        if (!isLinksValid()) {
-            alert('Links expirados! Atualize os links no botão ⚙️.');
-            return;
-        }
-        
         const select = document.getElementById('cursoSelect');
         const link = select.value;
+        const tempoSelect = document.getElementById('tempoExpiracao');
+        const minutos = tempoSelect.value;
         
         if (!link) return;
         
-        const textoPuro = `🔗 Aqui está seu link!\n${link}\n\n⏰ Lembrando que para sua segurança o link expirará em 15 minutos.\n\n📸 Me envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
+        const textoPuro = `Aqui está seu link!\n${link}\n\nLembrando que para sua segurança o link expirará em ${minutos} minutos.\n\nMe envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
 
         navigator.clipboard.writeText(textoPuro).then(() => {
             const status = document.getElementById('status');
@@ -661,6 +730,15 @@
 
     function abrirConfig() {
         const modal = document.getElementById('configModal');
+        const editArea = document.getElementById('editLinks');
+        const downloadBtn = document.getElementById('downloadJsonBtn');
+        const jsonPreview = document.getElementById('jsonPreview');
+        
+        editArea.value = '';
+        downloadBtn.style.display = 'none';
+        jsonPreview.style.display = 'none';
+        jsonGerado = null;
+        
         modal.style.display = 'flex';
     }
 
@@ -669,7 +747,7 @@
         modal.style.display = 'none';
     }
 
-    function salvarLinks() {
+    function processarLinks() {
         const texto = document.getElementById('editLinks').value;
         
         if (!texto.trim()) {
@@ -720,48 +798,51 @@
         }
         
         if (opcoes.length > 0) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(opcoes));
-            saveUpdateDate();
-            atualizarSelectComOpcoes(opcoes);
-            checkLinksValidity();
+            const hoje = new Date().toISOString().split('T')[0];
+            const dadosJson = {
+                data_atualizacao: hoje,
+                links: opcoes
+            };
             
-            alert(`✅ ${opcoes.length} links salvos com sucesso! Eles ficarão válidos até meia-noite.`);
-            fecharConfig();
+            jsonGerado = JSON.stringify(dadosJson, null, 2);
+            
+            // Mostrar o JSON gerado
+            document.getElementById('jsonResultado').value = jsonGerado;
+            document.getElementById('jsonPreview').style.display = 'block';
+            document.getElementById('downloadJsonBtn').style.display = 'block';
+            
+            alert(`${opcoes.length} links processados! Clique em "Baixar JSON" e substitua o arquivo links.json no GitHub.`);
         } else {
-            alert('❌ Nenhum link encontrado. Verifique o formato:\n\nExemplo:\n12x124,00 - 1.488,00$ 👇🏻\n*2° graduação 12 meses*\n🔗 https://mpago.la/...');
+            alert('Nenhum link encontrado. Verifique o formato:\n\nExemplo:\n12x124,00 - 1.488,00$ 👇🏻\n*2° graduação 12 meses*\n🔗 https://mpago.la/...');
         }
     }
 
-    function init() {
-        const savedData = localStorage.getItem(STORAGE_KEY);
-        
-        if (savedData) {
-            const opcoes = JSON.parse(savedData);
-            atualizarSelectComOpcoes(opcoes);
-        } else {
-            const opcoesPadrao = [
-                { categoria: "2° graduação 12 meses", valor: "12x124,00 - 1.488,00$", link: "https://mpago.la/2ppiqEy", nomeExibicao: "2° graduação 12 meses - 12x124,00 - 1.488,00$" },
-                { categoria: "2° graduação 12 meses (com desconto)", valor: "12x99,00 - 1.188,00$", link: "https://mpago.la/1atVomb", nomeExibicao: "2° graduação 12 meses (com desconto) - 12x99,00 - 1.188,00$" },
-                { categoria: "1 Pós", valor: "12x69,90 - R$ 838,80", link: "https://mpago.la/2AjDVmn", nomeExibicao: "1 Pós - 12x69,90 - R$ 838,80" },
-                { categoria: "2° graduação 18 meses", valor: "12x139,00 - 1.668,00$", link: "https://mpago.la/2Dfn5FM", nomeExibicao: "2° graduação 18 meses - 12x139,00 - 1.668,00$" },
-                { categoria: "2° graduação em 18 meses (com desconto)", valor: "12x119,00 - R$1428,00", link: "https://mpago.la/2KBj3Cm", nomeExibicao: "2° graduação em 18 meses (com desconto) - 12x119,00 - R$1428,00" },
-                { categoria: "Combo 2x 2ª Graduações 12 meses", valor: "12x198,00 - R$2376,00", link: "https://mpago.la/33aPNNC", nomeExibicao: "Combo 2x 2ª Graduações 12 meses - 12x198,00 - R$2376,00" },
-                { categoria: "Combo 2x 2ª Graduações 18 meses", valor: "12x238,00 - R$2856,00", link: "https://mpago.la/1Dprmgg", nomeExibicao: "Combo 2x 2ª Graduações 18 meses - 12x238,00 - R$2856,00" },
-                { categoria: "2 Pós + 1 Brinde", valor: "12x 89.90 - R$ 1078,80", link: "https://mpago.la/2zMELwq", nomeExibicao: "2 Pós + 1 Brinde - 12x 89.90 - R$ 1078,80" },
-                { categoria: "2 cursos de 2 graduação 12 meses", valor: "12x 218 - R$2616,00", link: "https://mpago.la/1pVV2sY", nomeExibicao: "2 cursos de 2 graduação 12 meses - 12x 218 - R$2616,00" }
-            ];
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(opcoesPadrao));
-            atualizarSelectComOpcoes(opcoesPadrao);
+    function baixarJSON() {
+        if (!jsonGerado) {
+            alert('Nenhum JSON gerado. Processe os links primeiro.');
+            return;
         }
         
-        checkLinksValidity();
+        const blob = new Blob([jsonGerado], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'links.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        alert('Arquivo links.json baixado! Agora substitua o arquivo no GitHub e faça commit.');
     }
 
+    // Iniciar: carregar links do JSON
+    carregarLinksDoJson();
+
+    // Verificar a cada minuto
     setInterval(() => {
-        checkLinksValidity();
+        carregarLinksDoJson();
     }, 60000);
-
-    init();
 
     window.onclick = function(event) {
         const modal = document.getElementById('configModal');
