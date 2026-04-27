@@ -323,7 +323,7 @@
         
         if (!link) return;
         
-        const textoPuro = `Aqui está seu link!\n${link}\n\nLembrando que para sua segurança o link expirará em ${minutos} minutos.\n\nMe envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
+        const textoPuro = `Aqui está seu link!\n${link}\n\nLembrando que para sua segurança o link expirará em *${minutos} minutos.*\n\nMe envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
 
         navigator.clipboard.writeText(textoPuro).then(() => {
             const status = document.getElementById('status');
