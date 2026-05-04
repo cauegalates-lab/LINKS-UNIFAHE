@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNIFAHE - Links, Objeções e Benefícios</title>
 
+    <!-- PRÉVIA DO WHATSAPP / REDES SOCIAIS -->
+    <!-- IMPORTANTE: troque o og:url pelo link real do seu GitHub Pages -->
+    <meta property="og:title" content="Links UNIFAHE">
+    <meta property="og:description" content="Acesse links de matrícula, quebras de objeção e benefícios UNIFAHE.">
+    <meta property="og:image" content="https://unifahe.edu.br/wp-content/uploads/2025/08/logo-unifahe.png">
+    <meta property="og:image:secure_url" content="https://unifahe.edu.br/wp-content/uploads/2025/08/logo-unifahe.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="668">
+    <meta property="og:image:height" content="184">
+    <meta property="og:url" content="https://SEU-USUARIO.github.io/SEU-REPOSITORIO/">
+    <meta property="og:type" content="website">
+
+    <!-- Prévia extra para alguns aplicativos -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Links UNIFAHE">
+    <meta name="twitter:description" content="Acesse links de matrícula, quebras de objeção e benefícios UNIFAHE.">
+    <meta name="twitter:image" content="https://unifahe.edu.br/wp-content/uploads/2025/08/logo-unifahe.png">
+    <!-- FIM DA PRÉVIA DO WHATSAPP -->
+
+
     <!-- ÍCONE DA ABA (FAVICON) -->
     <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23ff6d01'>🔗</text></svg>">
 
@@ -761,7 +781,7 @@
                     <option value="soEstouPesquisando">🔎 Só estou pesquisando</option>
                     <option value="naoTenhoDinheiro">💸 Não tenho dinheiro</option>
                     <option value="naoTenhoTempo">⏰ Não tenho tempo</option>
-                    <option value="precisoFalarComAlguem">👥 Preciso falar com alguém</option>
+                    <option value="precisoFalarComAlguem">👪 Preciso falar com alguém</option>
                     <option value="vouPensar">🧠 Vou pensar</option>
                     <option value="estaCaro">💸 Está caro</option>
                     <option value="depoisEuVejo">⏳ Depois eu vejo</option>
@@ -899,69 +919,69 @@
         copiarParaAreaTransferencia(textoPuro, 'status');
     }
 
-    // Textos prontos de quebra de objeção: 1 texto completo por objeção
+    // Textos das objeções ajustados exatamente conforme as imagens enviadas
     const objecoes = {
         soEstouPesquisando: {
             titulo: '🔎 "SÓ ESTOU PESQUISANDO"',
-            texto: `"Perfeito, a maioria começa assim. Você já possui graduação ou seria sua primeira formação?"
+            texto: `Perfeito, a maioria começa assim. Você já possui graduação ou seria sua primeira formação?
 
-"Ótimo momento pra entender as opções. Você busca crescimento profissional ou concurso?"
+Ótimo momento pra entender as opções. Você busca crescimento profissional ou concurso?
 
-"Perfeito. Você já tem uma área definida ou ainda está avaliando?"`
+Perfeito. Você já tem uma área definida ou ainda está avaliando?`
         },
         naoTenhoDinheiro: {
             titulo: '💸 "NÃO TENHO DINHEIRO"',
-            texto: `"Entendo, isso acontece mesmo. Se tivesse uma condição que coubesse hoje, você iniciaria?"
+            texto: `Entendo, isso acontece mesmo. Se tivesse uma condição que coubesse hoje, você iniciaria?
 
-"Faz sentido se organizar. O que pesa mais hoje: valor total ou forma de pagamento?"
+Faz sentido se organizar. O que pesa mais hoje: valor total ou forma de pagamento?
 
-"Perfeito. Se encontrarmos uma forma leve de começar, faria sentido iniciar agora?"`
+Perfeito. Se encontrarmos uma forma leve de começar, faria sentido iniciar agora?`
         },
         naoTenhoTempo: {
             titulo: '⏰ "NÃO TENHO TEMPO"',
-            texto: `"Isso é mais comum do que parece. Você conseguiria separar algumas horas por semana pra estudar?"
+            texto: `Isso é mais comum do que parece. Você conseguiria separar algumas horas por semana pra estudar?
 
-"Entendo a rotina corrida. Sua dificuldade é mais tempo ou organização?"
+Entendo a rotina corrida. Sua dificuldade é mais tempo ou organização?
 
-"Faz sentido. Se encaixar na sua rotina, você conseguiria começar?"`
+Faz sentido. Se encaixar na sua rotina, você conseguiria começar?`
         },
         precisoFalarComAlguem: {
-            titulo: '👥 "PRECISO FALAR COM ALGUÉM"',
-            texto: `"Perfeito, decisão importante mesmo. Vocês decidem mais pelo valor ou pela confiança?"
+            titulo: '👪 "PRECISO FALAR COM ALGUÉM"',
+            texto: `Perfeito, decisão importante mesmo. Vocês decidem mais pelo valor ou pela confiança?
 
-"Faz sentido alinhar. O que você acha que ele(a) vai analisar primeiro?"
+Faz sentido alinhar. O que você acha que ele(a) vai analisar primeiro?
 
-"Perfeito. Quer que eu te explique rápido pra você já levar tudo alinhado?"`
+Perfeito. Quer que eu te explique rápido pra você já levar tudo alinhado?`
         },
         vouPensar: {
             titulo: '🧠 "VOU PENSAR"',
-            texto: `"Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso?"
+            texto: `Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso?
 
-"Faz total sentido parar pra pensar. Sua dúvida hoje está mais na confiança do curso ou no momento de começar?"
+Faz total sentido parar pra pensar. Sua dúvida hoje está mais na confiança do curso ou no momento de começar?
 
-"Com certeza, decisão importante. O que exatamente você quer avaliar antes de seguir?"
+Com certeza, decisão importante. O que exatamente você quer avaliar antes de seguir?
 
-"Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso? Faz total sentido. Mas deixa eu te perguntar: o que te impede de garantir sua vaga hoje?"`
+Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso? Faz total sentido. Mas deixa eu te perguntar: o que te impede de garantir sua vaga hoje?`
         },
         estaCaro: {
             titulo: '💸 "ESTÁ CARO"',
-            texto: `"Entendo, isso é comum no início. Você está olhando mais o valor ou o retorno que o curso pode te trazer?"
+            texto: `Entendo, isso é comum no início. Você está olhando mais o valor ou o retorno que o curso pode te trazer?
 
-"Faz sentido analisar o investimento. Hoje pesa mais o valor agora ou o impacto na sua carreira?"
+Faz sentido analisar o investimento. Hoje pesa mais o valor agora ou o impacto na sua carreira?
 
-"Perfeito, análise importante. Está caro pelo momento ou você ainda não viu o valor completo do curso?"
+Perfeito, análise importante. Está caro pelo momento ou você ainda não viu o valor completo do curso?
 
-"Entendo! Mas veja bem: são apenas R$124,90 por mês — menos de R$5 por dia para ter um diploma reconhecido pelo MEC. Vale o investimento, né?"`
+Entendo! Mas veja bem: são apenas R$124,90 por mês — menos de R$5 por dia para ter um diploma reconhecido pelo MEC. Vale o investimento, né?`
         },
         depoisEuVejo: {
             titulo: '⏳ "DEPOIS EU VEJO"',
-            texto: `"Sem problema, analisar com calma é importante. Hoje você já sabe qual área quer seguir?"
+            texto: `Sem problema, analisar com calma é importante. Hoje você já sabe qual área quer seguir?
 
-"Claro, pode ver sim. Você pretende iniciar ainda esse mês ou mais pra frente?"
+Claro, pode ver sim. Você pretende iniciar ainda esse mês ou mais pra frente?
 
-"Perfeito. Hoje você está focado em crescer na área atual ou mudar de área?"
+Perfeito. Hoje você está focado em crescer na área atual ou mudar de área?
 
-"Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde quiser. Muitos alunos estudam 30 minutos por dia e concluem no prazo."`
+Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde quiser. Muitos alunos estudam 30 minutos por dia e concluem no prazo.`
         }
     };
 
@@ -975,7 +995,9 @@
     function copiarObjecaoAtual() {
         const chave = document.getElementById('objecaoSelect').value;
         const grupo = objecoes[chave];
-        copiarParaAreaTransferencia(`${grupo.titulo}\n\n${grupo.texto}`, 'statusObjecao');
+
+        // Copia somente o texto, sem o título da objeção
+        copiarParaAreaTransferencia(grupo.texto, 'statusObjecao');
     }
 
     const beneficios = [
@@ -1006,7 +1028,8 @@
     ];
 
     function copiarBeneficios() {
-        const texto = `Oferta do Benefício\nPor que escolher a UNIFAHE?\n\n${beneficios.map(item => `${item.titulo}\n${item.texto}`).join('\n\n')}`;
+        // Copia somente os textos dos benefícios, sem títulos
+        const texto = beneficios.map(item => item.texto).join('\n\n');
         copiarParaAreaTransferencia(texto, 'statusBeneficios');
     }
 
@@ -1014,8 +1037,8 @@
         const item = beneficios[indice];
         if (!item) return;
 
-        const texto = `${item.titulo}\n${item.texto}`;
-        copiarParaAreaTransferencia(texto, 'statusBeneficios');
+        // Copia somente o texto do benefício, sem o título
+        copiarParaAreaTransferencia(item.texto, 'statusBeneficios');
     }
 
     function copiarParaAreaTransferencia(texto, statusId) {
