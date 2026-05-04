@@ -215,20 +215,23 @@
 
         .page::-webkit-scrollbar,
         .output-box::-webkit-scrollbar,
-        .objection-text::-webkit-scrollbar {
+        .objection-text::-webkit-scrollbar,
+        .objection-list::-webkit-scrollbar {
             width: 6px;
         }
 
         .page::-webkit-scrollbar-track,
         .output-box::-webkit-scrollbar-track,
-        .objection-text::-webkit-scrollbar-track {
+        .objection-text::-webkit-scrollbar-track,
+        .objection-list::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
         }
 
         .page::-webkit-scrollbar-thumb,
         .output-box::-webkit-scrollbar-thumb,
-        .objection-text::-webkit-scrollbar-thumb {
+        .objection-text::-webkit-scrollbar-thumb,
+        .objection-list::-webkit-scrollbar-thumb {
             background: var(--unifahe-blue);
             border-radius: 10px;
         }
@@ -449,6 +452,19 @@
             color: rgba(255,255,255,0.95);
         }
 
+        .dark-bg-page .objection-question-card {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.18);
+        }
+
+        .dark-bg-page .objection-question-number {
+            background: var(--orange-strong);
+        }
+
+        .dark-bg-page .objection-question-text {
+            color: rgba(255,255,255,0.95);
+        }
+
         .dark-bg-page .output-box a,
         .dark-bg-page .output-box strong,
         .dark-bg-page .objection-display h2 {
@@ -482,11 +498,71 @@
             text-transform: uppercase;
         }
 
-        .objection-text {
-            min-height: 280px;
+        .objection-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
             max-height: 360px;
-            font-size: 14px;
+            overflow-y: auto;
+            padding-right: 4px;
             margin-bottom: 12px;
+        }
+
+        .objection-question-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 12px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .objection-question-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--unifahe-blue);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 900;
+            flex: 0 0 auto;
+        }
+
+        .objection-question-text {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+
+        .copy-question-btn {
+            border: 0;
+            border-radius: 12px;
+            background: rgba(255, 151, 0, 0.95);
+            color: #fff;
+            padding: 9px 12px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .copy-question-btn:hover {
+            background: var(--bg-orange);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(255, 109, 1, 0.22);
+        }
+
+        .objection-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
         }
 
         /* PÁGINA BENEFÍCIOS */
@@ -683,6 +759,16 @@
                 grid-template-columns: 1fr;
             }
 
+            .objection-question-card {
+                grid-template-columns: auto 1fr;
+                align-items: flex-start;
+            }
+
+            .copy-question-btn {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
             .benefits-page::before,
             .dark-bg-page::before {
                 font-size: 310px;
@@ -789,10 +875,12 @@
 
                 <div class="objection-display">
                     <h2 id="objecaoTitulo"></h2>
-                    <div class="objection-text" id="objecaoTexto"></div>
-                    <button class="action-btn orange-btn" onclick="copiarObjecaoAtual()">Copiar texto dessa objeção</button>
+                    <div class="objection-list" id="objecaoTexto"></div>
+                    <div class="objection-actions">
+                        <button class="action-btn orange-btn" onclick="copiarObjecaoAtual()">Copiar todas as perguntas dessa objeção</button>
+                    </div>
                 </div>
-                <div id="statusObjecao" class="copy-status">Quebra de objeção copiada!</div>
+                <div id="statusObjecao" class="copy-status">Pergunta copiada!</div>
             </div>
         </section>
 
@@ -919,85 +1007,118 @@
         copiarParaAreaTransferencia(textoPuro, 'status');
     }
 
-    // Textos das objeções ajustados exatamente conforme as imagens enviadas
+    // Perguntas das objeções ajustadas conforme as imagens enviadas
     const objecoes = {
         soEstouPesquisando: {
             titulo: '🔎 "SÓ ESTOU PESQUISANDO"',
-            texto: `Perfeito, a maioria começa assim. Você já possui graduação ou seria sua primeira formação?
-
-Ótimo momento pra entender as opções. Você busca crescimento profissional ou concurso?
-
-Perfeito. Você já tem uma área definida ou ainda está avaliando?`
+            perguntas: [
+                'Perfeito, a maioria começa assim. Você já possui graduação ou seria sua primeira formação?',
+                'Ótimo momento pra entender as opções. Você busca crescimento profissional ou concurso?',
+                'Perfeito. Você já tem uma área definida ou ainda está avaliando?'
+            ]
         },
         naoTenhoDinheiro: {
             titulo: '💸 "NÃO TENHO DINHEIRO"',
-            texto: `Entendo, isso acontece mesmo. Se tivesse uma condição que coubesse hoje, você iniciaria?
-
-Faz sentido se organizar. O que pesa mais hoje: valor total ou forma de pagamento?
-
-Perfeito. Se encontrarmos uma forma leve de começar, faria sentido iniciar agora?`
+            perguntas: [
+                'Entendo, isso acontece mesmo. Se tivesse uma condição que coubesse hoje, você iniciaria?',
+                'Faz sentido se organizar. O que pesa mais hoje: valor total ou forma de pagamento?',
+                'Perfeito. Se encontrarmos uma forma leve de começar, faria sentido iniciar agora?'
+            ]
         },
         naoTenhoTempo: {
             titulo: '⏰ "NÃO TENHO TEMPO"',
-            texto: `Isso é mais comum do que parece. Você conseguiria separar algumas horas por semana pra estudar?
-
-Entendo a rotina corrida. Sua dificuldade é mais tempo ou organização?
-
-Faz sentido. Se encaixar na sua rotina, você conseguiria começar?`
+            perguntas: [
+                'Isso é mais comum do que parece. Você conseguiria separar algumas horas por semana pra estudar?',
+                'Entendo a rotina corrida. Sua dificuldade é mais tempo ou organização?',
+                'Faz sentido. Se encaixar na sua rotina, você conseguiria começar?'
+            ]
         },
         precisoFalarComAlguem: {
             titulo: '👪 "PRECISO FALAR COM ALGUÉM"',
-            texto: `Perfeito, decisão importante mesmo. Vocês decidem mais pelo valor ou pela confiança?
-
-Faz sentido alinhar. O que você acha que ele(a) vai analisar primeiro?
-
-Perfeito. Quer que eu te explique rápido pra você já levar tudo alinhado?`
+            perguntas: [
+                'Perfeito, decisão importante mesmo. Vocês decidem mais pelo valor ou pela confiança?',
+                'Faz sentido alinhar. O que você acha que ele(a) vai analisar primeiro?',
+                'Perfeito. Quer que eu te explique rápido pra você já levar tudo alinhado?'
+            ]
         },
         vouPensar: {
             titulo: '🧠 "VOU PENSAR"',
-            texto: `Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso?
-
-Faz total sentido parar pra pensar. Sua dúvida hoje está mais na confiança do curso ou no momento de começar?
-
-Com certeza, decisão importante. O que exatamente você quer avaliar antes de seguir?
-
-Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso? Faz total sentido. Mas deixa eu te perguntar: o que te impede de garantir sua vaga hoje?`
+            perguntas: [
+                'Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso?',
+                'Faz total sentido parar pra pensar. Sua dúvida hoje está mais na confiança do curso ou no momento de começar?',
+                'Com certeza, decisão importante. O que exatamente você quer avaliar antes de seguir?',
+                'Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso? Faz total sentido. Mas deixa eu te perguntar: o que te impede de garantir sua vaga hoje?'
+            ]
         },
         estaCaro: {
             titulo: '💸 "ESTÁ CARO"',
-            texto: `Entendo, isso é comum no início. Você está olhando mais o valor ou o retorno que o curso pode te trazer?
-
-Faz sentido analisar o investimento. Hoje pesa mais o valor agora ou o impacto na sua carreira?
-
-Perfeito, análise importante. Está caro pelo momento ou você ainda não viu o valor completo do curso?
-
-Entendo! Mas veja bem: são apenas R$124,90 por mês — menos de R$5 por dia para ter um diploma reconhecido pelo MEC. Vale o investimento, né?`
+            perguntas: [
+                'Entendo, isso é comum no início. Você está olhando mais o valor ou o retorno que o curso pode te trazer?',
+                'Faz sentido analisar o investimento. Hoje pesa mais o valor agora ou o impacto na sua carreira?',
+                'Perfeito, análise importante. Está caro pelo momento ou você ainda não viu o valor completo do curso?',
+                'Entendo! Mas veja bem: são apenas R$124,90 por mês — menos de R$5 por dia para ter um diploma reconhecido pelo MEC. Vale o investimento, né?'
+            ]
         },
         depoisEuVejo: {
             titulo: '⏳ "DEPOIS EU VEJO"',
-            texto: `Sem problema, analisar com calma é importante. Hoje você já sabe qual área quer seguir?
-
-Claro, pode ver sim. Você pretende iniciar ainda esse mês ou mais pra frente?
-
-Perfeito. Hoje você está focado em crescer na área atual ou mudar de área?
-
-Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde quiser. Muitos alunos estudam 30 minutos por dia e concluem no prazo.`
+            perguntas: [
+                'Sem problema, analisar com calma é importante. Hoje você já sabe qual área quer seguir?',
+                'Claro, pode ver sim. Você pretende iniciar ainda esse mês ou mais pra frente?',
+                'Perfeito. Hoje você está focado em crescer na área atual ou mudar de área?',
+                'Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde quiser. Muitos alunos estudam 30 minutos por dia e concluem no prazo.'
+            ]
         }
     };
 
     function renderizarObjecao() {
         const chave = document.getElementById('objecaoSelect').value;
         const grupo = objecoes[chave];
+        const container = document.getElementById('objecaoTexto');
+
         document.getElementById('objecaoTitulo').textContent = grupo.titulo;
-        document.getElementById('objecaoTexto').textContent = grupo.texto;
+        container.innerHTML = '';
+
+        grupo.perguntas.forEach((pergunta, indice) => {
+            const card = document.createElement('div');
+            card.className = 'objection-question-card';
+
+            const numero = document.createElement('span');
+            numero.className = 'objection-question-number';
+            numero.textContent = indice + 1;
+
+            const texto = document.createElement('p');
+            texto.className = 'objection-question-text';
+            texto.textContent = pergunta;
+
+            const botao = document.createElement('button');
+            botao.type = 'button';
+            botao.className = 'copy-question-btn';
+            botao.textContent = 'Copiar';
+            botao.addEventListener('click', () => copiarPerguntaObjecao(chave, indice));
+
+            card.appendChild(numero);
+            card.appendChild(texto);
+            card.appendChild(botao);
+            container.appendChild(card);
+        });
+    }
+
+    function copiarPerguntaObjecao(chave, indice) {
+        const grupo = objecoes[chave];
+        const pergunta = grupo.perguntas[indice];
+        if (!pergunta) return;
+
+        // Copia somente a pergunta selecionada, sem título e sem aspas
+        copiarParaAreaTransferencia(pergunta, 'statusObjecao', 'Pergunta copiada!');
     }
 
     function copiarObjecaoAtual() {
         const chave = document.getElementById('objecaoSelect').value;
         const grupo = objecoes[chave];
+        const textoCompleto = grupo.perguntas.join('\n\n');
 
-        // Copia somente o texto, sem o título da objeção
-        copiarParaAreaTransferencia(grupo.texto, 'statusObjecao');
+        // Copia todas as perguntas da objeção, sem o título
+        copiarParaAreaTransferencia(textoCompleto, 'statusObjecao', 'Todas as perguntas foram copiadas!');
     }
 
     const beneficios = [
@@ -1041,15 +1162,17 @@ Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde
         copiarParaAreaTransferencia(item.texto, 'statusBeneficios');
     }
 
-    function copiarParaAreaTransferencia(texto, statusId) {
+    function copiarParaAreaTransferencia(texto, statusId, mensagemStatus = null) {
         if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(texto).then(() => mostrarStatus(statusId)).catch(() => copiarFallback(texto, statusId));
+            navigator.clipboard.writeText(texto)
+                .then(() => mostrarStatus(statusId, mensagemStatus))
+                .catch(() => copiarFallback(texto, statusId, mensagemStatus));
         } else {
-            copiarFallback(texto, statusId);
+            copiarFallback(texto, statusId, mensagemStatus);
         }
     }
 
-    function copiarFallback(texto, statusId) {
+    function copiarFallback(texto, statusId, mensagemStatus = null) {
         const textarea = document.createElement('textarea');
         textarea.value = texto;
         textarea.style.position = 'fixed';
@@ -1060,7 +1183,7 @@ Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde
 
         try {
             document.execCommand('copy');
-            mostrarStatus(statusId);
+            mostrarStatus(statusId, mensagemStatus);
         } catch (error) {
             alert('Erro ao copiar. Tente novamente.');
         }
@@ -1068,10 +1191,21 @@ Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde
         document.body.removeChild(textarea);
     }
 
-    function mostrarStatus(statusId) {
+    function mostrarStatus(statusId, mensagemStatus = null) {
         const status = document.getElementById(statusId);
+        if (!status) return;
+
+        if (!status.dataset.defaultText) {
+            status.dataset.defaultText = status.textContent;
+        }
+
+        status.textContent = mensagemStatus || status.dataset.defaultText;
         status.style.visibility = 'visible';
-        setTimeout(() => { status.style.visibility = 'hidden'; }, 2500);
+
+        setTimeout(() => {
+            status.style.visibility = 'hidden';
+            status.textContent = status.dataset.defaultText;
+        }, 2500);
     }
 
     document.getElementById('cursoSelect').addEventListener('change', gerarMensagem);
