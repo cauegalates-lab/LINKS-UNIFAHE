@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LINKS UNIFAHE</title>
-    
+    <title>UNIFAHE - Links, Objeções e Benefícios</title>
+
     <!-- ÍCONE DA ABA (FAVICON) -->
     <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23ff6d01'>🔗</text></svg>">
-    
+
     <style>
         :root {
             --bg-orange: #ff6d01;
+            --orange-strong: #ff9700;
+            --orange-soft: #fff3ea;
             --unifahe-blue: #003366;
+            --blue-dark: #071d35;
+            --blue-soft: #eef6ff;
+            --dark-panel: #191628;
+            --dark-card: rgba(25, 22, 40, 0.92);
+            --text-dark: #1f2937;
+            --text-muted: #667085;
+            --border-light: #e6e9ef;
+            --success: #28a745;
+            --white: #ffffff;
         }
 
         * {
@@ -21,83 +32,236 @@
         }
 
         html, body {
-            background-color: var(--bg-orange);
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
+            width: 100%;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 151, 0, 0.28), transparent 28%),
+                linear-gradient(135deg, #ff6d01 0%, #ff8700 42%, #003366 100%);
             overflow: hidden;
         }
 
-        .container {
-            background: white;
-            border-radius: 30px;
-            padding: 20px 30px;
-            width: 95%;
-            max-width: 550px;
-            height: auto;
-            max-height: 90vh;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            border: 5px solid var(--unifahe-blue);
+        body {
             display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-            overflow-y: auto;
-            position: relative;
+            justify-content: center;
+            align-items: center;
+            padding: 18px;
         }
 
-        .container::-webkit-scrollbar {
-            width: 5px;
+        button, select {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
         }
-        
-        .container::-webkit-scrollbar-track {
+
+        .app-shell {
+            width: min(1180px, 100%);
+            height: min(720px, calc(100vh - 36px));
+            background: rgba(255, 255, 255, 0.94);
+            border: 4px solid rgba(0, 51, 102, 0.96);
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.34);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 225px 1fr;
+        }
+
+        /* MENU LATERAL ESQUERDO */
+        .sidebar {
+            position: relative;
+            background:
+                linear-gradient(180deg, rgba(0, 51, 102, 0.96), rgba(7, 29, 53, 0.98)),
+                radial-gradient(circle at 20% 10%, rgba(255, 109, 1, 0.38), transparent 28%);
+            color: var(--white);
+            padding: 22px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .sidebar::after {
+            display: none;
+        }
+
+        .brand {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .logo {
+            width: 150px;
+            max-width: 100%;
+            margin: 0 auto 8px;
+            display: block;
+            background: rgba(255,255,255,0.95);
+            padding: 7px 10px;
+            border-radius: 14px;
+        }
+
+        .brand-title {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.62);
+            letter-spacing: 0.09em;
+            font-weight: 700;
+            margin: 2px 2px -8px;
+        }
+
+        .nav-buttons {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 13px 14px;
+            cursor: pointer;
+            text-align: left;
+            font-weight: 800;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.22s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateX(3px);
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 151, 0, 0.55);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--bg-orange), var(--orange-strong));
+            border-color: rgba(255,255,255,0.28);
+            box-shadow: 0 12px 24px rgba(255, 109, 1, 0.28);
+        }
+
+        .sidebar-footer {
+            position: relative;
+            z-index: 1;
+            margin-top: auto;
+            font-size: 10px;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.4;
+            border-top: 1px solid rgba(255,255,255,0.14);
+            padding-top: 12px;
+        }
+
+        .sidebar-footer strong {
+            color: var(--orange-strong);
+        }
+
+        /* ÁREA PRINCIPAL */
+        .main {
+            min-width: 0;
+            height: 100%;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top right, rgba(0, 51, 102, 0.08), transparent 30%),
+                #ffffff;
+        }
+
+        .page {
+            display: none;
+            height: 100%;
+            padding: 25px 28px;
+            overflow-y: auto;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page::-webkit-scrollbar,
+        .output-box::-webkit-scrollbar,
+        .objection-text::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .page::-webkit-scrollbar-track,
+        .output-box::-webkit-scrollbar-track,
+        .objection-text::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
         }
-        
-        .container::-webkit-scrollbar-thumb {
+
+        .page::-webkit-scrollbar-thumb,
+        .output-box::-webkit-scrollbar-thumb,
+        .objection-text::-webkit-scrollbar-thumb {
             background: var(--unifahe-blue);
             border-radius: 10px;
         }
 
-        .logo {
-            max-width: 150px;
-            margin: 0 auto 5px;
+        .page-header {
+            margin-bottom: 18px;
         }
 
-        h1 {
-            font-size: 18px;
-            margin: 5px 0 12px 0;
+        .page-header h1 {
+            font-size: clamp(25px, 3vw, 36px);
             color: var(--unifahe-blue);
-            text-transform: uppercase;
-            border-bottom: 2px solid var(--bg-orange);
-            padding-bottom: 5px;
+            line-height: 1.1;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .panel {
+            background: #fff;
+            border: 1px solid rgba(0, 51, 102, 0.12);
+            border-radius: 22px;
+            padding: 20px;
+            box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
         }
 
         label {
             display: block;
             text-align: left;
-            font-weight: bold;
-            margin-bottom: 4px;
+            font-weight: 800;
+            margin-bottom: 6px;
             font-size: 12px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
 
         select {
             width: 100%;
-            padding: 12px 15px;
-            border-radius: 12px;
+            padding: 13px 15px;
+            border-radius: 14px;
             border: 2px solid #e0e0e0;
             font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 15px;
+            font-weight: 600;
+            margin-bottom: 16px;
             outline: none;
             cursor: pointer;
             background: white;
             transition: all 0.3s ease;
-            font-family: 'Segoe UI', Roboto, sans-serif;
             color: #333;
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23003366' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -106,52 +270,42 @@
             background-size: 16px;
         }
 
-        select option {
-            padding: 12px;
-            font-size: 13px;
+        select:focus {
+            border-color: var(--unifahe-blue);
+            box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.08);
         }
 
-        select option:first-of-type {
-            color: #999;
-            font-style: italic;
-        }
-
-        /* Configuração de tempo */
         .time-config {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        .time-config label {
-            margin-bottom: 0;
-            font-size: 12px;
-        }
-
+        .time-config label,
         .time-config select {
-            width: auto;
             margin-bottom: 0;
-            padding: 8px 12px;
-            flex: 1;
+        }
+
+        .output-box,
+        .objection-text {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 14px;
+            text-align: left;
+            color: #333;
+            line-height: 1.55;
+            white-space: pre-wrap;
+            overflow-y: auto;
         }
 
         .output-box {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 12px;
-            text-align: left;
-            font-size: 13px;
-            line-height: 1.5;
-            min-height: 150px;
-            max-height: 180px;
-            overflow-y: auto; 
-            border: 1px solid #e0e0e0;
-            white-space: pre-wrap;
-            color: #333;
-            margin-bottom: 15px;
-            box-sizing: border-box;
+            min-height: 155px;
+            max-height: 210px;
+            margin-bottom: 14px;
+            font-size: 14px;
         }
 
         .output-box a {
@@ -161,136 +315,554 @@
             cursor: pointer;
         }
 
-        .output-box a:hover {
-            color: var(--bg-orange);
-        }
-
         .output-box strong {
-            font-weight: bold;
             color: var(--unifahe-blue);
         }
 
-        .output-box::-webkit-scrollbar {
-            width: 5px;
-        }
-        
-        .output-box::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        
-        .output-box::-webkit-scrollbar-thumb {
-            background: var(--unifahe-blue);
-            border-radius: 10px;
-        }
-
-        button {
+        .action-btn {
+            width: 100%;
             background: var(--unifahe-blue);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 14px;
+            padding: 13px 15px;
+            border-radius: 14px;
+            font-weight: 900;
+            font-size: 13px;
             cursor: pointer;
-            width: 100%;
             text-transform: uppercase;
-            transition: transform 0.2s, background 0.2s;
-            margin-bottom: 8px;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
         }
 
-        button:hover {
+        .action-btn:hover {
             background: #004c99;
-            transform: scale(0.98);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 51, 102, 0.18);
+        }
+
+        .orange-btn {
+            background: var(--bg-orange);
+        }
+
+        .orange-btn:hover {
+            background: #e45f00;
+            box-shadow: 0 8px 18px rgba(255, 109, 1, 0.22);
         }
 
         .copy-status {
+            height: 17px;
+            margin-top: 8px;
             font-size: 11px;
-            height: 16px;
-            color: #28a745;
-            font-weight: bold;
-            margin-bottom: 8px;
+            font-weight: 800;
+            color: var(--success);
             visibility: hidden;
-        }
-
-        .footer {
             text-align: center;
-            font-size: 10px;
-            color: #999;
-            padding-top: 8px;
-            border-top: 1px solid #e0e0e0;
-            margin-top: 5px;
         }
 
-        .footer span {
-            color: var(--bg-orange);
-            font-weight: bold;
+
+        /* FUNDO ESCURO PADRÃO DAS PÁGINAS */
+        .dark-bg-page {
+            background: var(--dark-panel);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-bg-page::before {
+            content: 'A';
+            position: absolute;
+            top: -70px;
+            left: 32%;
+            font-size: 440px;
+            line-height: 0.85;
+            font-weight: 950;
+            color: rgba(0, 93, 155, 0.35);
+            transform: rotate(-4deg);
+            pointer-events: none;
+        }
+
+        .dark-bg-page::after {
+            content: '';
+            position: absolute;
+            width: 620px;
+            height: 92px;
+            left: 22%;
+            top: 56%;
+            background: rgba(255, 109, 1, 0.78);
+            transform: rotate(-35deg);
+            border-radius: 999px;
+            box-shadow: 0 0 35px rgba(255, 109, 1, 0.26);
+            pointer-events: none;
+        }
+
+        .dark-bg-page .page-header,
+        .dark-bg-page .panel {
+            position: relative;
+            z-index: 1;
+        }
+
+        .dark-bg-page .page-header h1,
+        .dark-bg-page .page-header p {
+            color: #fff;
+        }
+
+        .dark-bg-page .page-header p {
+            color: rgba(255,255,255,0.88);
+        }
+
+        .dark-bg-page .panel {
+            background: rgba(25, 22, 40, 0.92);
+            border: 3px solid rgba(255,255,255,0.22);
+            border-left: 9px solid var(--orange-strong);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+        }
+
+        .dark-bg-page label {
+            color: #fff;
+        }
+
+        .dark-bg-page .output-box,
+        .dark-bg-page .objection-text,
+        .dark-bg-page .objection-display {
+            background: rgba(20, 18, 32, 0.88);
+            border-color: rgba(255,255,255,0.22);
+            color: rgba(255,255,255,0.95);
+        }
+
+        .dark-bg-page .output-box a,
+        .dark-bg-page .output-box strong,
+        .dark-bg-page .objection-display h2 {
+            color: var(--orange-strong);
+        }
+
+        /* PÁGINA OBJEÇÕES */
+        .objection-panel {
+            background: linear-gradient(135deg, var(--orange-soft), #ffffff 55%, #eef6ff);
+            border: 2px solid rgba(255, 109, 1, 0.24);
+        }
+
+        .dark-bg-page .objection-panel {
+            background: rgba(25, 22, 40, 0.92);
+            border: 3px solid rgba(255,255,255,0.22);
+            border-left: 9px solid var(--orange-strong);
+        }
+
+        .objection-display {
+            background: rgba(255,255,255,0.94);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 14px;
+            box-shadow: 0 6px 16px rgba(16, 24, 40, 0.05);
+        }
+
+        .objection-display h2 {
+            font-size: 17px;
+            color: var(--unifahe-blue);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .objection-text {
+            min-height: 280px;
+            max-height: 360px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        /* PÁGINA BENEFÍCIOS */
+        .benefits-page {
+            background: var(--dark-panel);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefits-page::before {
+            content: 'A';
+            position: absolute;
+            top: -70px;
+            left: 32%;
+            font-size: 440px;
+            line-height: 0.85;
+            font-weight: 950;
+            color: rgba(0, 93, 155, 0.35);
+            transform: rotate(-4deg);
+            pointer-events: none;
+        }
+
+        .benefits-page::after {
+            content: '';
+            position: absolute;
+            width: 620px;
+            height: 92px;
+            left: 22%;
+            top: 56%;
+            background: rgba(255, 109, 1, 0.78);
+            transform: rotate(-35deg);
+            border-radius: 999px;
+            box-shadow: 0 0 35px rgba(255, 109, 1, 0.26);
+            pointer-events: none;
+        }
+
+        .benefits-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefits-page .page-header h1,
+        .benefits-page .page-header p {
+            color: #fff;
+        }
+
+        .benefits-page .page-header h1 {
+            font-size: clamp(34px, 4.5vw, 54px);
+            margin-bottom: 16px;
+        }
+
+        .benefits-page .page-header p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 26px;
+        }
+
+        .benefit-card {
+            position: relative;
+            background: var(--dark-card);
+            border: 3px solid rgba(255,255,255,0.22);
+            border-left: 9px solid var(--orange-strong);
+            border-radius: 24px;
+            padding: 21px 23px;
+            min-height: 175px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .benefit-card h2 {
+            color: #fff;
+            font-size: 21px;
+            line-height: 1.22;
+            margin-bottom: 13px;
+            font-weight: 900;
+        }
+
+        .benefit-card p {
+            color: rgba(255,255,255,0.93);
+            font-size: 16px;
+            line-height: 1.46;
+        }
+
+        .benefit-copy-btn {
+            width: 100%;
+            margin-top: auto;
+            padding: 10px 12px;
+            border: 0;
+            border-radius: 13px;
+            background: rgba(255, 151, 0, 0.95);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .benefit-copy-btn:hover {
+            background: var(--bg-orange);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(255, 109, 1, 0.22);
+        }
+
+        .benefits-actions {
+            margin-top: 18px;
+            max-width: 280px;
+        }
+
+        @media (max-width: 1000px) {
+            html, body {
+                overflow: auto;
+            }
+
+            body {
+                align-items: flex-start;
+            }
+
+            .app-shell {
+                height: auto;
+                min-height: calc(100vh - 36px);
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                border-right: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.16);
+            }
+
+            .nav-buttons {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .nav-btn {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .sidebar-footer {
+                display: none;
+            }
+
+            .page {
+                height: auto;
+                min-height: 620px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 10px;
+            }
+
+            .app-shell {
+                border-radius: 22px;
+                border-width: 3px;
+            }
+
+            .sidebar {
+                padding: 16px;
+            }
+
+            .logo {
+                width: 130px;
+            }
+
+            .nav-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .page {
+                padding: 19px 16px;
+            }
+
+            .time-config {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-page::before,
+            .dark-bg-page::before {
+                font-size: 310px;
+                left: 9%;
+                top: 80px;
+            }
+
+            .benefits-page::after,
+            .dark-bg-page::after {
+                left: -55px;
+                top: 58%;
+                width: 430px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <img src="Horizontal colorido 1.png" alt="UNIFAHE" class="logo">
-    <h1>LINKS UNIFAHE</h1>
-    
-    <label>Escolha a oferta:</label>
-    <select id="cursoSelect">
-        <option value="">Selecione um curso...</option>
-        <!-- ⬇️⬇️⬇️ ALTERE OS LINKS AQUI ⬇️⬇️⬇️ -->
-        <option value="https://mpago.la/13styzE">2° graduação 12 meses - 12x124,00 - 1.488,00$</option>
-        <option value="https://mpago.la/1YScx3T">2° graduação 12 meses (com desconto) - 12x99,00 - 1.188,00$</option>
-        <option value="https://mpago.la/2xNDWYm">1 Pós - 12x69,90 - R$ 838,80</option>
-        <option value="https://mpago.la/1fqv7xz">2° graduação 18 meses - 12x139,00 - 1.668,00$</option>
-        <option value="https://mpago.la/1gHY7eo">2° graduação em 18 meses (com desconto) - 12x119,00 - R$1428,00</option>
-        <option value="https://mpago.la/1UGF7hH">Combo 2x 2ª Graduações 12 meses - 12x198,00 - R$2376,00</option>
-        <option value="https://mpago.la/27okuZK">Combo 2x 2ª Graduações 18 meses - 12x238,00 - R$2856,00</option>
-        <option value="https://mpago.la/1BAQtWJ">2 Pós + 1 Brinde - 12x 89.90 - R$ 1078,80</option>
-        <option value="https://mpago.la/1jCkPCh">2 cursos de 2 graduação 12 meses - 12x 218 - R$2616,00</option>
-        <!-- ⬆️⬆️⬆️ ALTERE OS LINKS AQUI ⬆️⬆️⬆️ -->
-    </select>
+<div class="app-shell">
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="Horizontal colorido 1.png" alt="UNIFAHE" class="logo">
+            <div class="brand-title">Central Comercial</div>
+        </div>
 
-    <!-- Configuração de tempo -->
-    <div class="time-config">
-        <label>Tempo de expiração:</label>
-        <select id="tempoExpiracao">
-            <option value="1">1 minuto</option>
-            <option value="3">3 minutos</option>
-            <option value="5">5 minutos</option>
-            <option value="10">10 minutos</option>
-            <option value="15" selected>15 minutos</option>
-            <option value="25">25 minutos</option>
-            <option value="30">30 minutos</option>
-            <option value="60">60 minutos</option>
-        </select>
-    </div>
+        <div class="menu-title">Menu</div>
+        <nav class="nav-buttons" aria-label="Menu principal">
+            <button class="nav-btn active" id="btnLinks" onclick="abrirPagina('links')">🔗 Links</button>
+            <button class="nav-btn" id="btnObjecoes" onclick="abrirPagina('objecoes')">💬 Objeções</button>
+            <button class="nav-btn" id="btnBeneficios" onclick="abrirPagina('beneficios')">⭐ Benefícios</button>
+        </nav>
 
-    <div class="output-box" id="mensagemOutput">Selecione uma oferta acima</div>
+        <div class="sidebar-footer">
+            Desenvolvido por <strong>Cauê</strong> & IA<br>
+            Links, quebras e benefícios em páginas separadas.
+        </div>
+    </aside>
 
-    <button onclick="copiarTexto()">Copiar Mensagem</button>
-    <div id="status" class="copy-status">Copiado com sucesso!</div>
-    
-    <div class="footer">
-        Desenvolvido por <span>Cauê</span> & IA
-    </div>
+    <main class="main">
+        <!-- PÁGINA 1: LINKS -->
+        <section class="page active dark-bg-page" id="pageLinks">
+            <header class="page-header">
+                <h1>Links UNIFAHE</h1>
+                <p>Selecione a oferta, ajuste o tempo de expiração e copie a mensagem pronta para o atendimento.</p>
+            </header>
+
+            <div class="panel">
+                <label for="cursoSelect">Escolha a oferta:</label>
+                <select id="cursoSelect">
+                    <option value="">Selecione um curso...</option>
+                    <!-- ⬇️⬇️⬇️ ALTERE OS LINKS AQUI ⬇️⬇️⬇️ -->
+                    <option value="https://mpago.la/13styzE">2° graduação 12 meses - 12x124,00 - 1.488,00$</option>
+                    <option value="https://mpago.la/1YScx3T">2° graduação 12 meses (com desconto) - 12x99,00 - 1.188,00$</option>
+                    <option value="https://mpago.la/2xNDWYm">1 Pós - 12x69,90 - R$ 838,80</option>
+                    <option value="https://mpago.la/1fqv7xz">2° graduação 18 meses - 12x139,00 - 1.668,00$</option>
+                    <option value="https://mpago.la/1gHY7eo">2° graduação em 18 meses (com desconto) - 12x119,00 - R$1428,00</option>
+                    <option value="https://mpago.la/1UGF7hH">Combo 2x 2ª Graduações 12 meses - 12x198,00 - R$2376,00</option>
+                    <option value="https://mpago.la/27okuZK">Combo 2x 2ª Graduações 18 meses - 12x238,00 - R$2856,00</option>
+                    <option value="https://mpago.la/1BAQtWJ">2 Pós + 1 Brinde - 12x 89.90 - R$ 1078,80</option>
+                    <option value="https://mpago.la/1jCkPCh">2 cursos de 2 graduação 12 meses - 12x 218 - R$2616,00</option>
+                    <!-- ⬆️⬆️⬆️ ALTERE OS LINKS AQUI ⬆️⬆️⬆️ -->
+                </select>
+
+                <div class="time-config">
+                    <label for="tempoExpiracao">Tempo de expiração:</label>
+                    <select id="tempoExpiracao">
+                        <option value="1">1 minuto</option>
+                        <option value="3">3 minutos</option>
+                        <option value="5">5 minutos</option>
+                        <option value="10">10 minutos</option>
+                        <option value="15" selected>15 minutos</option>
+                        <option value="25">25 minutos</option>
+                        <option value="30">30 minutos</option>
+                        <option value="60">60 minutos</option>
+                    </select>
+                </div>
+
+                <div class="output-box" id="mensagemOutput">Selecione uma oferta acima</div>
+
+                <button class="action-btn" onclick="copiarTexto()">Copiar mensagem</button>
+                <div id="status" class="copy-status">Copiado com sucesso!</div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 2: OBJEÇÕES -->
+        <section class="page dark-bg-page" id="pageObjecoes">
+            <header class="page-header">
+                <h1>Quebra de Objeção</h1>
+                <p>Escolha a objeção e copie o texto único que você enviou para cada situação.</p>
+            </header>
+
+            <div class="panel objection-panel">
+                <label for="objecaoSelect">Escolha a objeção:</label>
+                <select id="objecaoSelect" onchange="renderizarObjecao()">
+                    <option value="soEstouPesquisando">🔎 Só estou pesquisando</option>
+                    <option value="naoTenhoDinheiro">💸 Não tenho dinheiro</option>
+                    <option value="naoTenhoTempo">⏰ Não tenho tempo</option>
+                    <option value="precisoFalarComAlguem">👥 Preciso falar com alguém</option>
+                    <option value="vouPensar">🧠 Vou pensar</option>
+                    <option value="estaCaro">💸 Está caro</option>
+                    <option value="depoisEuVejo">⏳ Depois eu vejo</option>
+                </select>
+
+                <div class="objection-display">
+                    <h2 id="objecaoTitulo"></h2>
+                    <div class="objection-text" id="objecaoTexto"></div>
+                    <button class="action-btn orange-btn" onclick="copiarObjecaoAtual()">Copiar texto dessa objeção</button>
+                </div>
+                <div id="statusObjecao" class="copy-status">Quebra de objeção copiada!</div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 3: BENEFÍCIOS -->
+        <section class="page benefits-page" id="pageBeneficios">
+            <div class="benefits-content">
+                <header class="page-header">
+                    <h1>Oferta do Benefício</h1>
+                    <p>Por que escolher a UNIFAHE?</p>
+                </header>
+
+                <div class="benefits-grid" id="benefitsGrid">
+                    <article class="benefit-card">
+                        <h2>🎓 Plataforma & Tecnologia</h2>
+                        <p>Plataforma interativa estilo Netflix, acesso via celular/tablet/PC, videoaulas em 4K, conteúdos disponíveis desde o 1º dia</p>
+                        <button class="benefit-copy-btn" onclick="copiarBeneficio(0)">Copiar este benefício</button>
+                    </article>
+
+                    <article class="benefit-card">
+                        <h2>📚 Qualidade Acadêmica</h2>
+                        <p>Cursos reconhecidos pelo MEC, corpo docente de mestres e doutores, conclusão acelerada, até 3 tentativas gratuitas na prova, sem jubilamento</p>
+                        <button class="benefit-copy-btn" onclick="copiarBeneficio(1)">Copiar este benefício</button>
+                    </article>
+
+                    <article class="benefit-card">
+                        <h2>📄 Documentação & Suporte</h2>
+                        <p>Carteirinha e declarações gratuitas, certificado express em até 72h, atendimento humanizado do início ao diploma</p>
+                        <button class="benefit-copy-btn" onclick="copiarBeneficio(2)">Copiar este benefício</button>
+                    </article>
+
+                    <article class="benefit-card">
+                        <h2>💳 Valores & Condições</h2>
+                        <p>Mensalidade fixa sem reajustes, sem taxas extras, sem consulta ao SPC/Serasa, flexibilidade no pagamento</p>
+                        <button class="benefit-copy-btn" onclick="copiarBeneficio(3)">Copiar este benefício</button>
+                    </article>
+
+                    <article class="benefit-card">
+                        <h2>🎁 Benefícios Exclusivos</h2>
+                        <p>Pós-graduação 100% gratuita (até 600h), mais de 550 opções de pós, brindes e campanhas mensais</p>
+                        <button class="benefit-copy-btn" onclick="copiarBeneficio(4)">Copiar este benefício</button>
+                    </article>
+
+                    <article class="benefit-card">
+                        <h2>🚀 Flexibilidade</h2>
+                        <p>100% online, estude onde, quando e como quiser, ideal para concursos e progressão de carreira</p>
+                        <button class="benefit-copy-btn" onclick="copiarBeneficio(5)">Copiar este benefício</button>
+                    </article>
+                </div>
+
+                <div id="statusBeneficios" class="copy-status">Benefício copiado!</div>
+            </div>
+        </section>
+    </main>
 </div>
 
 <script>
+    function abrirPagina(pagina) {
+        const paginas = {
+            links: document.getElementById('pageLinks'),
+            objecoes: document.getElementById('pageObjecoes'),
+            beneficios: document.getElementById('pageBeneficios')
+        };
+
+        const botoes = {
+            links: document.getElementById('btnLinks'),
+            objecoes: document.getElementById('btnObjecoes'),
+            beneficios: document.getElementById('btnBeneficios')
+        };
+
+        Object.values(paginas).forEach(page => page.classList.remove('active'));
+        Object.values(botoes).forEach(btn => btn.classList.remove('active'));
+
+        paginas[pagina].classList.add('active');
+        botoes[pagina].classList.add('active');
+    }
+
     // Função para abrir link em janela pequena
     function abrirLinkPopup(link) {
         if (!link) return;
-        
+
         const width = 500;
         const height = 600;
         const left = (screen.width - width) / 2;
         const top = (screen.height - height) / 2;
-        
+
         const popup = window.open(
             link,
             '_blank',
             `width=${width},height=${height},left=${left},top=${top},toolbar=yes,scrollbars=yes,resizable=yes`
         );
-        
+
         if (popup) {
             popup.focus();
         } else {
@@ -304,14 +876,13 @@
         const output = document.getElementById('mensagemOutput');
         const tempoSelect = document.getElementById('tempoExpiracao');
         const minutos = tempoSelect.value;
-        
+
         if (!link) {
-            output.innerHTML = "Selecione uma oferta acima";
+            output.innerHTML = 'Selecione uma oferta acima';
             return;
         }
 
         const textoHTML = `Aqui está seu link!<br><a href="#" onclick="abrirLinkPopup('${link}'); return false;">${link}</a><br><br>Lembrando que para sua segurança o link expirará em <strong>${minutos} minutos</strong>.<br><br>Me envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
-        
         output.innerHTML = textoHTML;
     }
 
@@ -320,25 +891,168 @@
         const link = select.value;
         const tempoSelect = document.getElementById('tempoExpiracao');
         const minutos = tempoSelect.value;
-        
-        if (!link) return;
-        
-        const textoPuro = `Aqui está seu link!\n${link}\n\nLembrando que para sua segurança o link expirará em *${minutos} minutos.*\n\nMe envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
 
-        navigator.clipboard.writeText(textoPuro).then(() => {
-            const status = document.getElementById('status');
-            status.style.visibility = 'visible';
-            setTimeout(() => { status.style.visibility = 'hidden'; }, 2500);
-        }).catch(() => {
-            alert('Erro ao copiar. Tente novamente.');
-        });
+        if (!link) return;
+
+        const textoPuro = `Aqui está seu link!\n${link}\n\nLembrando que para sua segurança o link expirará em *${minutos} minutos.*\n\nMe envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
+        copiarParaAreaTransferencia(textoPuro, 'status');
     }
 
-    // Evento para gerar mensagem quando selecionar o curso
+    // Textos prontos de quebra de objeção: 1 texto completo por objeção
+    const objecoes = {
+        soEstouPesquisando: {
+            titulo: '🔎 "SÓ ESTOU PESQUISANDO"',
+            texto: `"Perfeito, a maioria começa assim. Você já possui graduação ou seria sua primeira formação?"
+
+"Ótimo momento pra entender as opções. Você busca crescimento profissional ou concurso?"
+
+"Perfeito. Você já tem uma área definida ou ainda está avaliando?"`
+        },
+        naoTenhoDinheiro: {
+            titulo: '💸 "NÃO TENHO DINHEIRO"',
+            texto: `"Entendo, isso acontece mesmo. Se tivesse uma condição que coubesse hoje, você iniciaria?"
+
+"Faz sentido se organizar. O que pesa mais hoje: valor total ou forma de pagamento?"
+
+"Perfeito. Se encontrarmos uma forma leve de começar, faria sentido iniciar agora?"`
+        },
+        naoTenhoTempo: {
+            titulo: '⏰ "NÃO TENHO TEMPO"',
+            texto: `"Isso é mais comum do que parece. Você conseguiria separar algumas horas por semana pra estudar?"
+
+"Entendo a rotina corrida. Sua dificuldade é mais tempo ou organização?"
+
+"Faz sentido. Se encaixar na sua rotina, você conseguiria começar?"`
+        },
+        precisoFalarComAlguem: {
+            titulo: '👥 "PRECISO FALAR COM ALGUÉM"',
+            texto: `"Perfeito, decisão importante mesmo. Vocês decidem mais pelo valor ou pela confiança?"
+
+"Faz sentido alinhar. O que você acha que ele(a) vai analisar primeiro?"
+
+"Perfeito. Quer que eu te explique rápido pra você já levar tudo alinhado?"`
+        },
+        vouPensar: {
+            titulo: '🧠 "VOU PENSAR"',
+            texto: `"Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso?"
+
+"Faz total sentido parar pra pensar. Sua dúvida hoje está mais na confiança do curso ou no momento de começar?"
+
+"Com certeza, decisão importante. O que exatamente você quer avaliar antes de seguir?"
+
+"Perfeito, é importante analisar mesmo. Você quer pensar mais pelo valor ou ainda tem alguma dúvida sobre o curso? Faz total sentido. Mas deixa eu te perguntar: o que te impede de garantir sua vaga hoje?"`
+        },
+        estaCaro: {
+            titulo: '💸 "ESTÁ CARO"',
+            texto: `"Entendo, isso é comum no início. Você está olhando mais o valor ou o retorno que o curso pode te trazer?"
+
+"Faz sentido analisar o investimento. Hoje pesa mais o valor agora ou o impacto na sua carreira?"
+
+"Perfeito, análise importante. Está caro pelo momento ou você ainda não viu o valor completo do curso?"
+
+"Entendo! Mas veja bem: são apenas R$124,90 por mês — menos de R$5 por dia para ter um diploma reconhecido pelo MEC. Vale o investimento, né?"`
+        },
+        depoisEuVejo: {
+            titulo: '⏳ "DEPOIS EU VEJO"',
+            texto: `"Sem problema, analisar com calma é importante. Hoje você já sabe qual área quer seguir?"
+
+"Claro, pode ver sim. Você pretende iniciar ainda esse mês ou mais pra frente?"
+
+"Perfeito. Hoje você está focado em crescer na área atual ou mudar de área?"
+
+"Nosso curso é 100% online e flexível! Você estuda no seu ritmo, quando e onde quiser. Muitos alunos estudam 30 minutos por dia e concluem no prazo."`
+        }
+    };
+
+    function renderizarObjecao() {
+        const chave = document.getElementById('objecaoSelect').value;
+        const grupo = objecoes[chave];
+        document.getElementById('objecaoTitulo').textContent = grupo.titulo;
+        document.getElementById('objecaoTexto').textContent = grupo.texto;
+    }
+
+    function copiarObjecaoAtual() {
+        const chave = document.getElementById('objecaoSelect').value;
+        const grupo = objecoes[chave];
+        copiarParaAreaTransferencia(`${grupo.titulo}\n\n${grupo.texto}`, 'statusObjecao');
+    }
+
+    const beneficios = [
+        {
+            titulo: '🎓 Plataforma & Tecnologia',
+            texto: 'Plataforma interativa estilo Netflix, acesso via celular/tablet/PC, videoaulas em 4K, conteúdos disponíveis desde o 1º dia'
+        },
+        {
+            titulo: '📚 Qualidade Acadêmica',
+            texto: 'Cursos reconhecidos pelo MEC, corpo docente de mestres e doutores, conclusão acelerada, até 3 tentativas gratuitas na prova, sem jubilamento'
+        },
+        {
+            titulo: '📄 Documentação & Suporte',
+            texto: 'Carteirinha e declarações gratuitas, certificado express em até 72h, atendimento humanizado do início ao diploma'
+        },
+        {
+            titulo: '💳 Valores & Condições',
+            texto: 'Mensalidade fixa sem reajustes, sem taxas extras, sem consulta ao SPC/Serasa, flexibilidade no pagamento'
+        },
+        {
+            titulo: '🎁 Benefícios Exclusivos',
+            texto: 'Pós-graduação 100% gratuita (até 600h), mais de 550 opções de pós, brindes e campanhas mensais'
+        },
+        {
+            titulo: '🚀 Flexibilidade',
+            texto: '100% online, estude onde, quando e como quiser, ideal para concursos e progressão de carreira'
+        }
+    ];
+
+    function copiarBeneficios() {
+        const texto = `Oferta do Benefício\nPor que escolher a UNIFAHE?\n\n${beneficios.map(item => `${item.titulo}\n${item.texto}`).join('\n\n')}`;
+        copiarParaAreaTransferencia(texto, 'statusBeneficios');
+    }
+
+    function copiarBeneficio(indice) {
+        const item = beneficios[indice];
+        if (!item) return;
+
+        const texto = `${item.titulo}\n${item.texto}`;
+        copiarParaAreaTransferencia(texto, 'statusBeneficios');
+    }
+
+    function copiarParaAreaTransferencia(texto, statusId) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(texto).then(() => mostrarStatus(statusId)).catch(() => copiarFallback(texto, statusId));
+        } else {
+            copiarFallback(texto, statusId);
+        }
+    }
+
+    function copiarFallback(texto, statusId) {
+        const textarea = document.createElement('textarea');
+        textarea.value = texto;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            document.execCommand('copy');
+            mostrarStatus(statusId);
+        } catch (error) {
+            alert('Erro ao copiar. Tente novamente.');
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    function mostrarStatus(statusId) {
+        const status = document.getElementById(statusId);
+        status.style.visibility = 'visible';
+        setTimeout(() => { status.style.visibility = 'hidden'; }, 2500);
+    }
+
     document.getElementById('cursoSelect').addEventListener('change', gerarMensagem);
-    
-    // Evento para gerar mensagem quando mudar os minutos
     document.getElementById('tempoExpiracao').addEventListener('change', gerarMensagem);
+    renderizarObjecao();
 </script>
 
 </body>
