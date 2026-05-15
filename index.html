@@ -821,16 +821,17 @@
                 <select id="cursoSelect">
                     <option value="">Selecione um curso...</option>
                     <!-- ⬇️⬇️⬇️ ALTERE OS LINKS AQUI ⬇️⬇️⬇️ -->
-                    <option value="https://mpago.la/1Z7gY9P">2° graduação 12 meses - 12x124,00 - R$ 1.488,00</option>
-                    <option value="https://mpago.la/1nr8J37">2° graduação 12 meses (com desconto) - 12x99,00 - R$ 1.188,00</option>
-                    <option value="https://mpago.la/2yZc94f">1 Pós - 12x69,90 - R$ 838,80</option>
-                    <option value="https://mpago.la/2WSg8b5">2° graduação 18 meses - 12x139,00 - R$ 1.668,00</option>
-                    <option value="https://mpago.la/2ngcuYU">2° graduação em 18 meses (com desconto) - 12x119,00 - R$ 1.428,00</option>
-                    <option value="https://mpago.la/32FQHLd">Combo 2x 2ª Graduações 12 meses - 12x198,00 - R$ 2.376,00</option>
-                    <option value="https://mpago.la/317yr4g">Combo 2x 2ª Graduações 18 meses - 12x238,00 - R$ 2.856,00</option>
-                    <option value="https://mpago.la/1AKpgHG">2 Pós + 1 Brinde - 12x89,90 - R$ 1.078,80</option>
-                    <option value="https://mpago.la/1cAzrQi">2 cursos de 2ª graduação 12 meses - 12x218,00 - R$ 2.616,00</option>
-                    <option value="https://mpago.la/21yMxL5">2ª graduação 12 meses - 12x139,00 - R$ 1.668,00</option>
+                   <option value="https://mpago.la/1XAamfA">2° graduação 12 meses - 12x124,00 - R$ 1.488,00</option>
+
+                    <option value="https://mpago.la/29iZjA4">2° graduação 12 meses (com desconto) - 12x99,00 - R$ 1.188,00</option>
+                    <option value="https://mpago.la/1qYSCie">1 Pós - 12x69,90 - R$ 838,80</option>
+                    <option value="https://mpago.la/2YrdqP2">2° graduação 18 meses - 12x139,00 - R$ 1.668,00</option>
+                    <option value="https://mpago.la/1nBuxG7">2° graduação em 18 meses (com desconto) - 12x119,00 - R$ 1.428,00</option>
+                    <option value="https://mpago.la/1Gg9Qbj">Combo 2x 2ª Graduações 12 meses - 12x198,00 - R$ 2.376,00</option>
+                    <option value="https://mpago.la/2oXGBfV">Combo 2x 2ª Graduações 18 meses - 12x238,00 - R$ 2.856,00</option>
+                    <option value="https://mpago.la/2851yTx">2 Pós + 1 Brinde - 12x89,90 - R$ 1.078,80</option>
+                    <option value="https://mpago.la/18i2yaY">2 cursos de 2ª graduação 12 meses - 12x218,00 - R$ 2.616,00</option>
+                    <option value="https://mpago.la/2ybKPRU">2ª graduação 12 meses - 12x139,00 - R$ 1.668,00</option>
                     <!-- ⬆️⬆️⬆️ ALTERE OS LINKS AQUI ⬆️⬆️⬆️ -->
                 </select>
 
@@ -984,27 +985,23 @@
         const select = document.getElementById('cursoSelect');
         const link = select.value;
         const output = document.getElementById('mensagemOutput');
-        const tempoSelect = document.getElementById('tempoExpiracao');
-        const minutos = tempoSelect.value;
 
         if (!link) {
             output.innerHTML = 'Selecione uma oferta acima';
             return;
         }
 
-        const textoHTML = `Aqui está seu link!<br><a href="#" onclick="abrirLinkPopup('${link}'); return false;">${link}</a><br><br>Lembrando que para sua segurança o link expirará em <strong>${minutos} minutos</strong>.<br><br>Me envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
+        const textoHTML = `Acabei de liberar o link de pagamento no cartão para você finalizar sua inscrição.<br><br>link de pagamento<br><a href="#" onclick="abrirLinkPopup('${link}'); return false;">${link}</a><br><br>Assim que concluir o pagamento, me encaminha o comprovante enviado no e-mail para eu confirmar sua matrícula.`;
         output.innerHTML = textoHTML;
     }
 
     function copiarTexto() {
         const select = document.getElementById('cursoSelect');
         const link = select.value;
-        const tempoSelect = document.getElementById('tempoExpiracao');
-        const minutos = tempoSelect.value;
 
         if (!link) return;
 
-        const textoPuro = `Aqui está seu link!\n${link}\n\nLembrando que para sua segurança o link expirará em *${minutos} minutos.*\n\nMe envie o comprovante assim que finalizar o pagamento. Após o envio liberamos automaticamente seu acesso à plataforma.`;
+        const textoPuro = `Acabei de liberar o link de pagamento no cartão para você finalizar sua inscrição.\n\nlink de pagamento\n${link}\n\nAssim que concluir o pagamento, me encaminha o comprovante enviado no e-mail para eu confirmar sua matrícula.`;
         copiarParaAreaTransferencia(textoPuro, 'status');
     }
 
